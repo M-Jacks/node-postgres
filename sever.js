@@ -14,7 +14,7 @@ const pool = new Pool({
     port: process.env.DB_PORT || 5432, // default PostgreSQL port
   });
 
-app.get('/users', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM users');
