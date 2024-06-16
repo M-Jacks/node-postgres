@@ -3,7 +3,6 @@ const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
-const port = 4000;
 
 // PostgreSQL connection configuration
 const pool = new Pool({
@@ -14,7 +13,7 @@ const pool = new Pool({
     port: process.env.DB_PORT || 5432, // default PostgreSQL port
   });
 
-app.get('/', async (req, res) => {
+app.get('/users', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM users');
@@ -38,6 +37,7 @@ app.get('/products', async (req, res) => {
   }
 });
 
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
